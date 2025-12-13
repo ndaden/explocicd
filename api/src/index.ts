@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
 
-const app = new Elysia()
+const app = new Elysia({ prefix: '/api' })
   // Configuration de Swagger
   .use(
     swagger({
