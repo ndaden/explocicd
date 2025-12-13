@@ -1,20 +1,29 @@
 'use client';
 
-import { useState } from 'react';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { useState, useEffect } from 'react';
 
 export default function ApiTester() {
   const [response, setResponse] = useState<unknown>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [apiUrl, setApiUrl] = useState<string>('');
+
+  // Récupérer la configuration au chargement
+  useEffect(() => {
+    fetch('/api/config')
+      .then(res => res.json())
+      .then(config => setApiUrl(config.apiUrl))
+      .catch(() => setApiUrl('http://localhost:3001'));
+  }, []);
 
   const testApi = async () => {
+    if (!apiUrl) return;
+    
     setLoading(true);
     setError(null);
     
     try {
-      const res = await fetch(`${API_URL}/`);
+      const res = await fetch(`${apiUrl}/`);
       const data = await res.json();
       setResponse(data);
     } catch (err) {
@@ -31,7 +40,7 @@ export default function ApiTester() {
           Test API ElysiaJS
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          API URL: <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{API_URL}</code>
+          API URL: <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{apiUrl || 'Chargement...'}</code>
         </p>
       </div>
 
@@ -48,7 +57,7 @@ export default function ApiTester() {
           <strong className="font-bold">Erreur: </strong>
           <span className="block sm:inline">{error}</span>
           <p className="text-sm mt-2">
-            Assurez-vous que l&apos;API est démarrée sur <code>{API_URL}</code>
+            Assurez-vous que l&apos;API est démarrée sur <code>{apiUrl}</code>
           </p>
         </div>
       )}
