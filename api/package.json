@@ -1,0 +1,21 @@
+{
+  "name": "explocicd-api",
+  "version": "1.0.0",
+  "description": "API ElysiaJS pour explocicd",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir ./dist --target bun"
+  },
+  "dependencies": {
+    "elysia": "^1.1.29",
+    "@elysiajs/swagger": "^1.1.6"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}
+
+
