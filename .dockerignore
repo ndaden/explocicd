@@ -1,0 +1,27 @@
+# Dépendances
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js
+.next
+out
+build
+
+# Env
+.env*
+!.env.example
+
+# Git
+.git
+.gitignore
+
+# Divers
+.DS_Store
+*.pem
+
+# API (séparée du frontend)
+api
+
