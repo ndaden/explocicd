@@ -10,7 +10,7 @@ export default function ApiTester() {
 
   // Récupérer la configuration au chargement
   useEffect(() => {
-    fetch('/api/config')
+    fetch('/apiconfig')
       .then(res => res.json())
       .then(config => setApiUrl(config.apiUrl))
       .catch(() => setApiUrl('http://localhost:3001'));
